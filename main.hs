@@ -10,11 +10,6 @@ verificandoOpcoes opcao =
         putStrLn "Opção inválida!"
         main
 
-entraNomeJogador :: IO String
-entraNomeJogador = do
-    putStrLn "Nome para o ranking"
-    nome <- getLine
-    return nome
 
 
 imprimeCabecalhoTabuleiro listaCabecalho = do
@@ -46,10 +41,22 @@ imprimeTabuleiroBatalhaNaval n = do
     imprimeRestoTabuleiro listaResto
     putStrLn ""
 
+entraNomeJogador :: IO String
+entraNomeJogador = do
+    putStrLn "Nome para o ranking (Máximo 5 caracteres):"
+    nome <- getLine
+    verificaNomeJogador nome
+    return nome
+
+verificaNomeJogador nome = do
+    if (length nome) == 0 || (length nome) > 5 then do
+        putStrLn "Nome inválido!"
+        entraNomeJogador
+    else do
+        return nome
 
 jogo = do
     nomeJogador <- entraNomeJogador
-
     imprimeTabuleiroBatalhaNaval 10
 
 ranking = putStrLn "RANKING ..."
