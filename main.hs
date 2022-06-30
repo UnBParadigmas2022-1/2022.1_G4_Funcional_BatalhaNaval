@@ -16,14 +16,41 @@ entraNomeJogador = do
     nome <- getLine
     return nome
 
-imprimeTabuleiro = do
-    putStrLn (take (12) (repeat '~') ++ "\n~" ++ take (10) (repeat ' ') ++ "~\n" ++ take (12) (repeat '~') )
+
+imprimeCabecalhoTabuleiro listaCabecalho = do
+    if (length listaCabecalho) == 0 then do
+        return ()
+    else do
+        putStr (show (head listaCabecalho))
+        putStr " "
+        imprimeCabecalhoTabuleiro (tail listaCabecalho)
+
+imprimeMarTabuleiro= do
+    putStrLn ['~' | x <- [1..10]]
+        
+
+imprimeRestoTabuleiro listaResto = do
+    if (length listaResto) == 0 then do
+        return ()
+    else do
+        putStr (show (head listaResto))
+        imprimeMarTabuleiro
+        imprimeRestoTabuleiro (tail listaResto)
+
+
+imprimeTabuleiroBatalhaNaval n = do
+    let listaCabecalho = [0..n]
+    let listaResto = [1..n]
+    imprimeCabecalhoTabuleiro listaCabecalho
     putStrLn ""
+    imprimeRestoTabuleiro listaResto
+    putStrLn ""
+
 
 jogo = do
     nomeJogador <- entraNomeJogador
-    
-    imprimeTabuleiro
+
+    imprimeTabuleiroBatalhaNaval 10
 
 ranking = putStrLn "RANKING ..."
 
