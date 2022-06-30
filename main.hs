@@ -2,6 +2,7 @@ import System.Exit (exitFailure, exitSuccess)
 import Data.Char (ord)
 import Data.List (permutations)
 
+
 verificandoOpcoes opcao = 
     if opcao == "1" then jogo
     else if opcao == "2" then ranking
@@ -11,35 +12,42 @@ verificandoOpcoes opcao =
         main
 
 
-
-imprimeCabecalhoTabuleiro listaCabecalho = do
-    if (length listaCabecalho) == 0 then do
+imprimeCoordenadaX indicesX = do
+    if (length indicesX) == 0 then do
         return ()
     else do
-        putStr (show (head listaCabecalho))
+        putStr (show (head indicesX))
         putStr " "
-        imprimeCabecalhoTabuleiro (tail listaCabecalho)
+        imprimeCoordenadaX (tail indicesX)
 
-imprimeMarTabuleiro= do
-    putStrLn ['~' | x <- [1..10]]
-        
 
-imprimeRestoTabuleiro listaResto = do
-    if (length listaResto) == 0 then do
+imprimeTabuleiro n = do
+    if n == 0 then do
         return ()
     else do
-        putStr (show (head listaResto))
-        imprimeMarTabuleiro
-        imprimeRestoTabuleiro (tail listaResto)
+        putStr "~ "
+        imprimeTabuleiro (n-1)
+
+
+imprimeCoordenadaY indicesY n = do
+    if (length indicesY) == 0 then do
+        return ()
+    else do
+        putStr (show (head indicesY))
+        putStr " "
+        imprimeTabuleiro n
+        putStrLn ""
+        imprimeCoordenadaY (tail indicesY) n
 
 
 imprimeTabuleiroBatalhaNaval n = do
-    let listaCabecalho = [0..n]
-    let listaResto = [1..n]
-    imprimeCabecalhoTabuleiro listaCabecalho
+    let indicesX = [0..n]
+    let indicesY = tail indicesX
+    imprimeCoordenadaX indicesX
     putStrLn ""
-    imprimeRestoTabuleiro listaResto
+    imprimeCoordenadaY indicesY n
     putStrLn ""
+
 
 entraNomeJogador :: IO String
 entraNomeJogador = do
@@ -48,6 +56,7 @@ entraNomeJogador = do
     verificaNomeJogador nome
     return nome
 
+
 verificaNomeJogador nome = do
     if (length nome) == 0 || (length nome) > 5 then do
         putStrLn "Nome inválido!"
@@ -55,11 +64,14 @@ verificaNomeJogador nome = do
     else do
         return nome
 
+
 jogo = do
     nomeJogador <- entraNomeJogador
-    imprimeTabuleiroBatalhaNaval 10
+    imprimeTabuleiroBatalhaNaval 9
+
 
 ranking = putStrLn "RANKING ..."
+
 
 apresentaMenu :: IO String
 apresentaMenu = do
@@ -71,8 +83,8 @@ apresentaMenu = do
     opcao <- getLine
     return opcao
 
+
 main :: IO ()
 main = do
     opcao <- apresentaMenu
     verificandoOpcoes opcao
-    -- main
