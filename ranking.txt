@@ -1,0 +1,3 @@
+alvaro	9000
+italo	10000
+ian	5000
