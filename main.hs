@@ -51,23 +51,39 @@ imprimeTabuleiroBatalhaNaval n = do
 
 entraNomeJogador :: IO String
 entraNomeJogador = do
-    putStrLn "Nome para o ranking (Máximo 5 caracteres):"
+    putStrLn "Nome para o ranking (Máximo 10 caracteres):"
     nome <- getLine
     verificaNomeJogador nome
     return nome
 
 
 verificaNomeJogador nome = do
-    if (length nome) == 0 || (length nome) > 5 then do
+    if (length nome) == 0 || (length nome) > 10 then do
         putStrLn "Nome inválido!"
         entraNomeJogador
     else do
         return nome
 
+entraCoordenadaJogador :: IO Int
+entraCoordenadaJogador = do
+    putStrLn "Digite um número da coordenadaX (De 0 a 9): "
+    coordX <- getLine
+    let n = read coordX :: Int
+    return n
+
+entraCoordenadaJogadorY :: IO Int
+entraCoordenadaJogadorY = do
+    putStrLn "Digite um número coordenadaY (De 0 a 9): "
+    coordY <- getLine
+    let n = read coordY :: Int
+    return n
 
 jogo = do
     nomeJogador <- entraNomeJogador
+    coordenadaX <- entraCoordenadaJogadorX
+    coordenadaY <- entraCoordenadaJogadorY
     imprimeTabuleiroBatalhaNaval 9
+
 
 
 ranking = putStrLn "RANKING ..."
