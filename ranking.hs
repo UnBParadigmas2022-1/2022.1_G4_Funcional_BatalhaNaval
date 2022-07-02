@@ -11,7 +11,9 @@ salvaRegistro nome pontuacao = do
     appendFile "ranking.txt" registro
 
 recuperaRegistrosOrdenados = do
-    putStr "recuperandoRegistros"
+    putStr "RANKING\n"
+    ranking <- readFile "ranking.txt"
+    putStr ranking
 
 main :: IO ()
 main = do
