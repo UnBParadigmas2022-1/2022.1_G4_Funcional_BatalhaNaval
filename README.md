@@ -1,45 +1,53 @@
-# RepositorioTemplate
-Esse repositório é para ser utilizado pelos grupos como um template inicial, da home page do Projeto.
-As seções do Template NÃO DEVEM SER OMITIDAS, sendo TODAS RELEVANTES.
-
-**!! *Atenção: Renomeie o seu repositório para (Ano.Semestre)_(Grupo)_(Paradigma)_(NomeDoProjeto)*. !!** 
-
-Paradigmas:
- - Funcional
- - Logico
- - SMA
-
-**!! *Não coloque os nomes dos alunos no título do repositório*. !!**
-
-**!! *Exemplo de título correto: 2022.1_G1_Logico_ProjetoRoteirosAereos*. !!**
- 
- (Apague esses comentários)
-
-# NomeDoProjeto
+# 2022.1_G4_Funcional_BatalhaNaval
 
 **Disciplina**: FGA0210 - PARADIGMAS DE PROGRAMAÇÃO - T01 <br>
-**Nro do Grupo**: XX<br>
-**Paradigma**: XXXXXXXXXX<br>
+**Nro do Grupo**: 04<br>
+**Paradigma**: Funcional<br>
 
 ## Alunos
 |Matrícula | Aluno |
 | -- | -- |
-| xx/xxxxxx  |  xxxx xxxx xxxxx |
-| xx/xxxxxx  |  xxxx xxxx xxxxx |
+| 18/0096991  |  Álvaro Leles |
+| 18/0100831  |  Gabriel Avelino |
+| 18/0145088  |  Gabriel Bonifácio |
+| 18/0101617  |  Guilherme de Morais |
+| 18/0102087  |  Ian Fillipe |
+| 18/0113666  |  Ítalo Guimarães |
+| 18/0102656  |  Ítalo Vinicius |
+| 20/0043111  |  Ricardo De Castro |
 
 ## Sobre 
-Descreva o seu projeto em linhas gerais. 
-Use referências, links, que permitam conhecer um pouco mais sobre o projeto.
+<p style="text-indent: 20px; text-align: justify">
+O nosso projeto aborda um jogo típico e bastante conhecido, o <a>batalha naval</a>, onde o objetivo do jogador é encontrar a artilharia inimiga contendo navios, barcos e submarinos atravéz das coordenadas. O jogo normalmente possui dois jogadores, mas nessa versão feita em Haskell o nosso usúario ira jogar contra a máquina, onde os barcos e navios inimigos serão gerados aleatoriamente pelo mapa.
+</p>
 
 ## Screenshots
 Adicione 2 ou mais screenshots do projeto em termos de interface e/ou funcionamento.
 
 ## Instalação 
-**Linguagens**: xxxxxx<br>
+**Linguagens**: Haskell<br>
 **Tecnologias**: xxxxxx<br>
 Descreva os pré-requisitos para rodar o seu projeto e os comandos necessários.
 Insira um manual ou um script para auxiliar ainda mais.
 Gifs animados e outras ilustrações são bem-vindos!
+
+```
+Para rodar o programa:
+    
+    Primeiro entre no Prelude com o comando abaixo:
+
+        terminal> ghci
+    
+    Dentro do Prelude digite:
+
+        Prelude>:load main
+    
+    Dentro da Main escreva:
+
+        *Main> main
+    
+    Pronto, divirta-se!
+```
 
 ## Uso 
 Explique como usar seu projeto.
