@@ -7,7 +7,7 @@ import System.IO
 
 salvaRegistro :: [Char] -> [Char] -> IO ()
 salvaRegistro nome pontuacao = do
-    let registro = nome ++ "\t" ++ pontuacao ++ "\n"
+    let registro = "(\"" ++ nome ++ "\", " ++ pontuacao ++ ")\n"
     appendFile "ranking.txt" registro
 
 recuperaRegistrosOrdenados = do
