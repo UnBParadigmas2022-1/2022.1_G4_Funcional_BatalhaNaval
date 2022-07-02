@@ -5,6 +5,10 @@ module Ranking
 
 import System.IO
 
+import Control.Applicative ((<$>))
+import Data.List (sortBy)
+import Data.Ord (comparing, Down(..))
+
 salvaRegistro :: [Char] -> [Char] -> IO ()
 salvaRegistro nome pontuacao = do
     let registro = "(\"" ++ nome ++ "\", " ++ pontuacao ++ ")\n"
@@ -12,8 +16,10 @@ salvaRegistro nome pontuacao = do
 
 recuperaRegistrosOrdenados = do
     putStr "RANKING\n"
-    ranking <- readFile "ranking.txt"
-    putStr ranking
+    arquivo <- openFile "ranking.txt" ReadMode
+    registros <- map read <$> lines <$> hGetContents arquivo :: IO [(String, Int)]
+    let r = sortBy (comparing (Down . snd)) registros
+    print $ r
 
 main :: IO ()
 main = do
