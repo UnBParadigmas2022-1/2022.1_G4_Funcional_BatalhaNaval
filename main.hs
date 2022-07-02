@@ -2,6 +2,7 @@ import System.Exit (exitFailure, exitSuccess)
 import Data.Char (ord)
 import Data.List (permutations)
 
+import Ranking
 
 verificandoOpcoes opcao = 
     if opcao == "1" then jogo
@@ -70,8 +71,7 @@ jogo = do
     imprimeTabuleiroBatalhaNaval 9
 
 
-ranking = putStrLn "RANKING ..."
-
+ranking = recuperaRegistrosOrdenados
 
 apresentaMenu :: IO String
 apresentaMenu = do

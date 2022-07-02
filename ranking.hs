@@ -1,4 +1,4 @@
-module Hanking
+module Ranking
 ( salvaRegistro
 , recuperaRegistrosOrdenados
 ) where
