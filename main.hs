@@ -1,6 +1,7 @@
 import System.Exit (exitFailure, exitSuccess)
 import Data.Char (ord)
 import Data.List (permutations)
+import System.Random
 
 
 verificandoOpcoes opcao = 
@@ -64,8 +65,8 @@ verificaNomeJogador nome = do
     else do
         return nome
 
-entraCoordenadaJogador :: IO Int
-entraCoordenadaJogador = do
+entraCoordenadaJogadorX :: IO Int
+entraCoordenadaJogadorX = do
     putStrLn "Digite um número da coordenadaX (De 0 a 9): "
     coordX <- getLine
     let n = read coordX :: Int
@@ -78,10 +79,48 @@ entraCoordenadaJogadorY = do
     let n = read coordY :: Int
     return n
 
+imprimeLista lista = do
+    print lista
+
+
+geraCoordenadaSub pos_y n = do
+    head <- randomRIO (1, (n-1))  :: IO Int
+    let tail = (head + 1)
+    return [[[pos_y, head], [pos_y, tail]]]
+
+geraCoordenadaBarco pos_y n = do
+    head <- randomRIO (1, (n-2))  :: IO Int
+    let body = (head + 1)
+    let tail = (head + 2)
+    return [[[pos_y, head], [pos_y, body], [pos_y, tail]]]
+
+geraCoordenadaNavio pos_y n = do
+    head <- randomRIO (1, (n-3))  :: IO Int
+    let body1 = (head + 1)
+    let body2 = (head + 2)
+    let tail = (head + 3)
+    return [[[pos_y, head], [pos_y, body1], [pos_y, body2], [pos_y, tail]]]
+
 jogo = do
     nomeJogador <- entraNomeJogador
+    imprimeTabuleiroBatalhaNaval 9
     coordenadaX <- entraCoordenadaJogadorX
     coordenadaY <- entraCoordenadaJogadorY
+    sub1 <- geraCoordenadaSub 1 9
+    --imprimeLista sub1
+    sub2 <- geraCoordenadaSub 3 9
+    --imprimeLista sub2
+    barco1 <- geraCoordenadaBarco 4 9
+    --imprimeLista barco1
+    barco2 <- geraCoordenadaBarco 6 9
+    --imprimeLista barco2
+    navio1 <- geraCoordenadaNavio 7 9
+    let lista = sub1 ++ sub2 ++ barco1 ++ barco2 ++ navio1
+
+    -- visualiza a lista gerada
+    imprimeLista lista
+
+    -- verificar onde já existe embarcação e mostrá-las
     imprimeTabuleiroBatalhaNaval 9
 
 
