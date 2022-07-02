@@ -14,12 +14,15 @@ salvaRegistro nome pontuacao = do
     let registro = "(\"" ++ nome ++ "\", " ++ pontuacao ++ ")\n"
     appendFile "ranking.txt" registro
 
+mostraRegistro :: (String, Int) -> String
+mostraRegistro (nome, pontuacao) = nome ++ "\t" ++ show pontuacao ++ "\n"
+
 recuperaRegistrosOrdenados = do
     putStr "RANKING\n"
     arquivo <- openFile "ranking.txt" ReadMode
     registros <- map read <$> lines <$> hGetContents arquivo :: IO [(String, Int)]
-    let r = sortBy (comparing (Down . snd)) registros
-    print $ r
+    let ordenados = sortBy (comparing (Down . snd)) registros
+    putStrLn $ concatMap mostraRegistro ordenados
 
 main :: IO ()
 main = do
