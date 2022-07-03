@@ -109,9 +109,6 @@ rotinaJogo barcos sub navios barcosAtingidos naviosAtingidos subsAtingidos pontu
         else do
             let coordenadas = [(coordenadaX, coordenadaY)]
             let tentativasAtual = tentativas ++ coordenadas
-            --print(coordenadas)
-            --print(tentativasAtual)
-
 
             if (any (\(x, y) -> x == coordenadaX && y == coordenadaY) barcos)
                 then do 
@@ -154,6 +151,7 @@ rotinaJogo barcos sub navios barcosAtingidos naviosAtingidos subsAtingidos pontu
     
     else
         do
+        imprimeTabuleiroDinamico subsAtingidos barcosAtingidos naviosAtingidos tentativas 9
         putStrLn ("\nFim de jogo! Você atingiu o máximo de tentativas possíveis.")
         putStr ("Jogador ")
         putStr (nomeJogador)
@@ -203,9 +201,6 @@ imprimeLista lista = do
 achouCoordenada coordenadaX coordenadaY lista 
     | (any (\(x, y) -> x == coordenadaX && y == coordenadaY) lista) = 1
     | otherwise = 0
-    -- if ((any (\(x, y) -> x == coordenadaX && y == coordenadaY) lista))
-    --     then 1
-    -- else 0
 
 jogo = do    
     nomeJogador <- entraNomeJogador
@@ -232,13 +227,13 @@ jogo = do
     let listaNavio = converterListaParaTupla naviosSemLetra
 
     -- visualiza a lista gerada
-    putStrLn "Lista de embarcações:\n"
+    putStrLn "Lista de embarcações (gabarito):\n"
     imprimeLista listaSub 
     imprimeLista listaBarco 
     imprimeLista listaNavio
     putStrLn "\n"
 
-    rotinaJogo listaBarco listaSub listaNavio [] [] [] 0 [] 1 nomeJogador
+    rotinaJogo listaBarco listaSub listaNavio [] [] [] 0 [] 10 nomeJogador
 
 
 ranking = recuperaRegistrosOrdenados
