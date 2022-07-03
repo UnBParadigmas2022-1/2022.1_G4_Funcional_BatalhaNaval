@@ -26,9 +26,11 @@ recuperaRegistrosOrdenados = do
 
 main :: IO ()
 main = do
-    putStrLn "Digite o nome:"
-    nome <- getLine
-    putStrLn "Digite a pontuacao:"
-    pontuacao <- getLine
+    recuperaRegistrosOrdenados
 
-    salvaRegistro nome pontuacao
+    --putStrLn "Digite o nome:"
+    --nome <- getLine
+    --putStrLn "Digite a pontuacao:"
+    --pontuacao <- getLine
+
+    --salvaRegistro nome pontuacao
