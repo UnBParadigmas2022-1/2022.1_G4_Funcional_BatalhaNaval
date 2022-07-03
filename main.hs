@@ -3,6 +3,8 @@ import Data.Char (ord)
 import Data.List (permutations)
 import System.Random
 
+import Ranking
+
 converter :: String -> [[String]]
 converter = map (map return) . lines
 
@@ -237,7 +239,7 @@ jogo = do
     rotinaJogo listaBarco listaSub listaNavio [] [] [] 0 [] 1 nomeJogador
 
 
-ranking = putStrLn "RANKING ..."
+ranking = recuperaRegistrosOrdenados
 
 
 apresentaMenu :: IO String
