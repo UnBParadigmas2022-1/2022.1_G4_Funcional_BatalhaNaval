@@ -73,6 +73,8 @@ filtrarAlvosNaoAtingidos lista xInserido yInserido =
 
 rotinaJogo barcos sub navios barcosAtingidos naviosAtingidos subsAtingidos pontuacao tentativas = do
     
+    imprimeTabuleiroBatalhaNaval 9
+
     -- solicita jogada
     coordenadaX <- entraCoordenadaJogadorX
     coordenadaY <- entraCoordenadaJogadorY
@@ -97,27 +99,45 @@ rotinaJogo barcos sub navios barcosAtingidos naviosAtingidos subsAtingidos pontu
     else do
         let coordenadas = [(coordenadaX, coordenadaY)]
         let tentativasAtual = tentativas ++ coordenadas
-        print(coordenadas)
-        print(tentativasAtual)
+        --print(coordenadas)
+        --print(tentativasAtual)
 
 
-        --if ((achouCoordenada coordenadaX coordenadaY tentativasAtual) == 1)
-            --then let pontuacaoAtual = pontuacao + 3
-            --    in coordenadas:barcosAtingidos
+        if (any (\(x, y) -> x == coordenadaX && y == coordenadaY) barcos)
+            then do 
+                let pontuacaoAtual = pontuacao + 3
+                let barcosAtingidosAtual = coordenadas ++ barcosAtingidos
+                print("Voce acertou um barco e ganhou 3 pontos!")
+                putStr("B.A.A: ")
+                print(barcosAtingidosAtual)
+                rotinaJogo barcos sub navios barcosAtingidosAtual naviosAtingidos subsAtingidos pontuacaoAtual tentativasAtual
 
-        -- else if (achouCoordenada coordenadaX coordenadaY sub)
-        --     then let pontuacaoAtual = pontuacao + 2
-        --         in coordenadas:subsAtingidos
+        else if (any (\(x, y) -> x == coordenadaX && y == coordenadaY) sub)
+            then do 
+                let pontuacaoAtual = pontuacao + 2
+                let subsAtingidosAtual = coordenadas ++ subsAtingidos
+                print("Voce acertou um submarino, ganhou 2 pontos e matou o Bob Esponja!")
+                putStr("S.A.A: ")
+                print(subsAtingidosAtual)
+                rotinaJogo barcos sub navios barcosAtingidos naviosAtingidos subsAtingidosAtual pontuacaoAtual tentativasAtual
 
-        -- else if (achouCoordenada coordenadaX coordenadaY navios)
-        --     then let pontuacaoAtual = pontuacao + 4
-        --         in coordenadas:naviosAtingidos
+        else if (any (\(x, y) -> x == coordenadaX && y == coordenadaY) navios)
+            then do 
+                let pontuacaoAtual = pontuacao + 4
+                let naviosAtingidosAtual = coordenadas ++ naviosAtingidos
+                print("Voce acertou um navio e ganhou 4 pontos!")
+                putStr("N.A.A: ")
+                print(naviosAtingidosAtual)
+                rotinaJogo barcos sub navios barcosAtingidos naviosAtingidosAtual subsAtingidos pontuacaoAtual tentativasAtual
 
-        -- else
-        --     if (pontuacao > 0)
-        --         then putStrLn "Poxa! Você não atingiu nenhuma embarcação ativa e perdeu 1 ponto."
-        --     else
-        --         putStrLn "Poxa! Você não atingiu nenhuma embarcação ativa."
+        else
+            if (pontuacao > 0)
+                then do 
+                    putStrLn "Poxa! Você não atingiu nenhuma embarcação e perdeu 1 ponto."
+                    let pontuacaoAtual = pontuacao - 1
+                    rotinaJogo barcos sub navios barcosAtingidos naviosAtingidos subsAtingidos pontuacaoAtual tentativasAtual
+            else
+                putStrLn "Poxa! Você não atingiu nenhuma embarcação."
 
 
         --(coordenadaX, coordenadaY):tentativas
@@ -129,9 +149,6 @@ rotinaJogo barcos sub navios barcosAtingidos naviosAtingidos subsAtingidos pontu
         -- let naviosAtingidos = filtrarAlvosNaoAtingidos(navios, coordenadaX, coordenadaY)
         -- let subAtingidos = filtrarAlvosNaoAtingidos(sub, coordenadaX, coordenadaY)
 
-
-
-        imprimeTabuleiroBatalhaNaval 9
 
 
         rotinaJogo barcos sub navios barcosAtingidos naviosAtingidos subsAtingidos pontuacaoAtual tentativasAtual
