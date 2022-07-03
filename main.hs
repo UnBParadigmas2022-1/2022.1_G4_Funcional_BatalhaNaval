@@ -86,39 +86,60 @@ imprimeLista lista = do
 geraCoordenadaSub pos_y n = do
     head <- randomRIO (1, (n-1))  :: IO Int
     let tail = (head + 1)
-    return [[[pos_y, head], [pos_y, tail]]]
+    return [(pos_y, head), (pos_y, tail)]
 
 geraCoordenadaBarco pos_y n = do
     head <- randomRIO (1, (n-2))  :: IO Int
     let body = (head + 1)
     let tail = (head + 2)
-    return [[[pos_y, head], [pos_y, body], [pos_y, tail]]]
+    return [(pos_y, head), (pos_y, body), (pos_y, tail)]
 
 geraCoordenadaNavio pos_y n = do
     head <- randomRIO (1, (n-3))  :: IO Int
     let body1 = (head + 1)
     let body2 = (head + 2)
     let tail = (head + 3)
-    return [[[pos_y, head], [pos_y, body1], [pos_y, body2], [pos_y, tail]]]
+    return [(pos_y, head), (pos_y, body1), (pos_y, body2), (pos_y, tail)]
 
-jogo = do
+encontraCoordenadaLista coordenadaX coordenadaY lista tipo = do
+    if ((any (\(x, y) -> x == coordenadaX && y == coordenadaY) lista) && tipo == 4)
+        then putStrLn "\nAcertou um navio! + 4 pontos\n"
+    else if ((any (\(x, y) -> x == coordenadaX && y == coordenadaY) lista) && tipo == 3)
+        then putStrLn "\nAcertou um barco! + 3 pontos\n"
+    else if ((any (\(x, y) -> x == coordenadaX && y == coordenadaY) lista) && tipo == 2)
+        then putStrLn "\nAcertou um sub! + 2 pontos\n"
+    else putStrLn "\nErrou!\n"
+
+jogo = do    
     nomeJogador <- entraNomeJogador
     imprimeTabuleiroBatalhaNaval 9
-    coordenadaX <- entraCoordenadaJogadorX
-    coordenadaY <- entraCoordenadaJogadorY
+
+    -- cria embarcações no mapa
     sub1 <- geraCoordenadaSub 1 9
-    --imprimeLista sub1
     sub2 <- geraCoordenadaSub 3 9
-    --imprimeLista sub2
     barco1 <- geraCoordenadaBarco 4 9
-    --imprimeLista barco1
     barco2 <- geraCoordenadaBarco 6 9
-    --imprimeLista barco2
     navio1 <- geraCoordenadaNavio 7 9
-    let lista = sub1 ++ sub2 ++ barco1 ++ barco2 ++ navio1
+    let listaSub = sub1 ++ sub2 
+    let listaBarco = barco1 ++ barco2
+    let listaNavio = navio1
 
     -- visualiza a lista gerada
-    imprimeLista lista
+    putStrLn "Lista de embarcações:\n"
+    imprimeLista listaSub 
+    imprimeLista listaBarco 
+    imprimeLista listaNavio
+    putStrLn "\n"
+
+    -- solicita jogada
+    coordenadaX <- entraCoordenadaJogadorX
+    coordenadaY <- entraCoordenadaJogadorY
+
+    -- 4 = navio
+    -- 3 = barco
+    -- 2 = sub
+    -- verifica se a jogada acertou o navio 
+    encontraCoordenadaLista coordenadaX coordenadaY listaBarco 3
 
     -- verificar onde já existe embarcação e mostrá-las
     imprimeTabuleiroBatalhaNaval 9
