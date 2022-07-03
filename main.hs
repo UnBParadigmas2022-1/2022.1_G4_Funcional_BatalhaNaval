@@ -154,13 +154,15 @@ rotinaJogo barcos sub navios barcosAtingidos naviosAtingidos subsAtingidos pontu
     
     else
         do
-        --let pontuacaoFinal = pontuacao
         putStrLn ("\nFim de jogo! Você atingiu o máximo de tentativas possíveis.")
         putStr ("Jogador ")
         putStr (nomeJogador)
         putStr (", sua pontuação foi: ")
         putStr (show pontuacao)
         putStrLn "\n"
+
+        salvaRegistro nomeJogador (show pontuacao)
+
         exitSuccess
         --putStrLn "\n\n"
         --return ()
