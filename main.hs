@@ -36,50 +36,51 @@ imprimeCoordenadaX indicesX = do
         imprimeCoordenadaX (tail indicesX)
 
 
-imprimeTabuleiro n = do
-    if n == 0 then do
+imprimeTabuleiro matriz = do
+    if length matriz == 0 then do
         return ()
     else do
+        putStr (head matriz)
+        putStr " "
+        imprimeTabuleiro (tail matriz)
 
-        putStr "~ "
-        imprimeTabuleiro (n-1)
 
-
-imprimeCoordenadaY indicesY n = do
+imprimeCoordenadaY indicesY matriz = do
     if (length indicesY) == 0 then do
         return ()
     else do
         putStr (show (head indicesY))
         putStr " "
-        imprimeTabuleiro n
+        imprimeTabuleiro (head matriz)
         putStrLn ""
-        imprimeCoordenadaY (tail indicesY) n
+        imprimeCoordenadaY (tail indicesY) (tail matriz)
 
-
-imprimeTabuleiroBatalhaNaval n = do
+imprimeTabuleiroBatalhaNaval n matriz = do
     let indicesX = [0..n]
-    let indicesY = tail indicesX
+    putStr "  "
     imprimeCoordenadaX indicesX
     putStrLn ""
-    imprimeCoordenadaY indicesY n
+    imprimeCoordenadaY indicesX matriz
     putStrLn ""
 
+imprimeTabuleiroDinamico subsAtingidos barcosAtingidos naviosAtingidos tentativas n = do
+    let matriz = [[
+            if (any (\(x, y) -> x == i && y == j) subsAtingidos) then "S"
+            else if (any (\(x, y) -> x == i && y == j) barcosAtingidos) then "B"
+            else if (any (\(x, y) -> x == i && y == j) naviosAtingidos) then "N"
+            else if (any (\(x, y) -> x == i && y == j) tentativas) then "."
+            else "~" | i <- [0..n] ] | j <- [0..n] ]
 
-filtrarAlvosAtingidos lista xInserido yInserido = 
-    filter (\(x, y) -> x == xInserido && y == yInserido) lista
+    imprimeTabuleiroBatalhaNaval n matriz
 
-filtrarAlvosNaoAtingidos lista xInserido yInserido = 
-    filter (\(x, y) -> x /= xInserido || y /= yInserido) lista
 
 rotinaJogo barcos sub navios barcosAtingidos naviosAtingidos subsAtingidos pontuacao tentativas = do
     
-    imprimeTabuleiroBatalhaNaval 9
+    imprimeTabuleiroDinamico subsAtingidos barcosAtingidos naviosAtingidos tentativas 9
 
     -- solicita jogada
     coordenadaX <- entraCoordenadaJogadorX
     coordenadaY <- entraCoordenadaJogadorY
-
-
 
     -- 4 = navio
     -- 3 = barco
@@ -140,17 +141,6 @@ rotinaJogo barcos sub navios barcosAtingidos naviosAtingidos subsAtingidos pontu
                 putStrLn "Poxa! Você não atingiu nenhuma embarcação."
 
 
-        --(coordenadaX, coordenadaY):tentativas
-
-
-        -- verificar onde já existe embarcação e mostrá-las
-
-        -- let barcosAtingidos = filtrarAlvosNaoAtingidos(barcos, coordenadaX, coordenadaY)
-        -- let naviosAtingidos = filtrarAlvosNaoAtingidos(navios, coordenadaX, coordenadaY)
-        -- let subAtingidos = filtrarAlvosNaoAtingidos(sub, coordenadaX, coordenadaY)
-
-
-
         rotinaJogo barcos sub navios barcosAtingidos naviosAtingidos subsAtingidos pontuacaoAtual tentativasAtual
 
 
@@ -195,7 +185,6 @@ achouCoordenada coordenadaX coordenadaY lista
 
 jogo = do    
     nomeJogador <- entraNomeJogador
-    imprimeTabuleiroBatalhaNaval 9
 
     -- Ler o arquivo de entrada aleatório
     arquivo <- randomRIO (0, 99) :: IO Int
