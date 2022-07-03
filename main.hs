@@ -74,74 +74,94 @@ imprimeTabuleiroDinamico subsAtingidos barcosAtingidos naviosAtingidos tentativa
     imprimeTabuleiroBatalhaNaval n matriz
 
 
-rotinaJogo barcos sub navios barcosAtingidos naviosAtingidos subsAtingidos pontuacao tentativas = do
+rotinaJogo barcos sub navios barcosAtingidos naviosAtingidos subsAtingidos pontuacao tentativas tentativasRestantes nomeJogador = do
+
+    if (tentativasRestantes > 0)
+        then do
     
-    imprimeTabuleiroDinamico subsAtingidos barcosAtingidos naviosAtingidos tentativas 9
+        imprimeTabuleiroDinamico subsAtingidos barcosAtingidos naviosAtingidos tentativas 9
 
-    -- solicita jogada
-    coordenadaX <- entraCoordenadaJogadorX
-    coordenadaY <- entraCoordenadaJogadorY
+        putStr "\nSua pontuação atual é: "
+        print(pontuacao)
+        putStr "\n"
 
-    -- 4 = navio
-    -- 3 = barco
-    -- 2 = sub
-    -- verifica se a jogada acertou o barco
-    let pontuacaoAtual = 0
+        -- solicita jogada
+        coordenadaX <- entraCoordenadaJogadorX
+        coordenadaY <- entraCoordenadaJogadorY
 
-
-    let encontrou = any (\(x, y) -> x == coordenadaX && y == coordenadaY) tentativas
-    
-    
-    if (encontrou)
-        then do 
-            putStrLn "Esse ponto já foi atacado. Você está perdendo tempo na guerra. Coloque uma nova coordenada."
-            rotinaJogo barcos sub navios barcosAtingidos naviosAtingidos subsAtingidos pontuacao tentativas
-    
-    else do
-        let coordenadas = [(coordenadaX, coordenadaY)]
-        let tentativasAtual = tentativas ++ coordenadas
-        --print(coordenadas)
-        --print(tentativasAtual)
+        -- 4 = navio
+        -- 3 = barco
+        -- 2 = sub
+        -- verifica se a jogada acertou o barco
+        let pontuacaoAtual = 0
 
 
-        if (any (\(x, y) -> x == coordenadaX && y == coordenadaY) barcos)
+        let encontrou = any (\(x, y) -> x == coordenadaX && y == coordenadaY) tentativas
+        
+        
+        if (encontrou)
             then do 
-                let pontuacaoAtual = pontuacao + 3
-                let barcosAtingidosAtual = coordenadas ++ barcosAtingidos
-                print("Voce acertou um barco e ganhou 3 pontos!")
-                putStr("B.A.A: ")
-                print(barcosAtingidosAtual)
-                rotinaJogo barcos sub navios barcosAtingidosAtual naviosAtingidos subsAtingidos pontuacaoAtual tentativasAtual
+                putStrLn "Esse ponto já foi atacado. Você está perdendo tempo na guerra. Coloque uma nova coordenada."
+                rotinaJogo barcos sub navios barcosAtingidos naviosAtingidos subsAtingidos pontuacao tentativas (tentativasRestantes-1) nomeJogador
+        
+        else do
+            let coordenadas = [(coordenadaX, coordenadaY)]
+            let tentativasAtual = tentativas ++ coordenadas
+            --print(coordenadas)
+            --print(tentativasAtual)
 
-        else if (any (\(x, y) -> x == coordenadaX && y == coordenadaY) sub)
-            then do 
-                let pontuacaoAtual = pontuacao + 2
-                let subsAtingidosAtual = coordenadas ++ subsAtingidos
-                print("Voce acertou um submarino, ganhou 2 pontos e matou o Bob Esponja!")
-                putStr("S.A.A: ")
-                print(subsAtingidosAtual)
-                rotinaJogo barcos sub navios barcosAtingidos naviosAtingidos subsAtingidosAtual pontuacaoAtual tentativasAtual
 
-        else if (any (\(x, y) -> x == coordenadaX && y == coordenadaY) navios)
-            then do 
-                let pontuacaoAtual = pontuacao + 4
-                let naviosAtingidosAtual = coordenadas ++ naviosAtingidos
-                print("Voce acertou um navio e ganhou 4 pontos!")
-                putStr("N.A.A: ")
-                print(naviosAtingidosAtual)
-                rotinaJogo barcos sub navios barcosAtingidos naviosAtingidosAtual subsAtingidos pontuacaoAtual tentativasAtual
-
-        else
-            if (pontuacao > 0)
+            if (any (\(x, y) -> x == coordenadaX && y == coordenadaY) barcos)
                 then do 
-                    putStrLn "Poxa! Você não atingiu nenhuma embarcação e perdeu 1 ponto."
-                    let pontuacaoAtual = pontuacao - 1
-                    rotinaJogo barcos sub navios barcosAtingidos naviosAtingidos subsAtingidos pontuacaoAtual tentativasAtual
+                    let pontuacaoAtual = pontuacao + 3
+                    let barcosAtingidosAtual = coordenadas ++ barcosAtingidos
+                    print("Voce acertou um barco e ganhou 3 pontos!")
+                    putStr("B.A.A: ")
+                    print(barcosAtingidosAtual)
+                    rotinaJogo barcos sub navios barcosAtingidosAtual naviosAtingidos subsAtingidos pontuacaoAtual tentativasAtual (tentativasRestantes-1) nomeJogador
+
+            else if (any (\(x, y) -> x == coordenadaX && y == coordenadaY) sub)
+                then do 
+                    let pontuacaoAtual = pontuacao + 2
+                    let subsAtingidosAtual = coordenadas ++ subsAtingidos
+                    print("Voce acertou um submarino, ganhou 2 pontos e matou o Bob Esponja!")
+                    putStr("S.A.A: ")
+                    print(subsAtingidosAtual)
+                    rotinaJogo barcos sub navios barcosAtingidos naviosAtingidos subsAtingidosAtual pontuacaoAtual tentativasAtual (tentativasRestantes-1) nomeJogador
+
+            else if (any (\(x, y) -> x == coordenadaX && y == coordenadaY) navios)
+                then do 
+                    let pontuacaoAtual = pontuacao + 4
+                    let naviosAtingidosAtual = coordenadas ++ naviosAtingidos
+                    print("Voce acertou um navio e ganhou 4 pontos!")
+                    putStr("N.A.A: ")
+                    print(naviosAtingidosAtual)
+                    rotinaJogo barcos sub navios barcosAtingidos naviosAtingidosAtual subsAtingidos pontuacaoAtual tentativasAtual (tentativasRestantes-1) nomeJogador
+
             else
-                putStrLn "Poxa! Você não atingiu nenhuma embarcação."
+                if (pontuacao > 0)
+                    then do 
+                        putStrLn "Poxa! Você não atingiu nenhuma embarcação e perdeu 1 ponto."
+                        let pontuacaoAtual = pontuacao - 1
+                        rotinaJogo barcos sub navios barcosAtingidos naviosAtingidos subsAtingidos pontuacaoAtual tentativasAtual (tentativasRestantes-1) nomeJogador
+                else
+                    putStrLn "Poxa! Você não atingiu nenhuma embarcação."
 
 
-        rotinaJogo barcos sub navios barcosAtingidos naviosAtingidos subsAtingidos pontuacaoAtual tentativasAtual
+            rotinaJogo barcos sub navios barcosAtingidos naviosAtingidos subsAtingidos pontuacaoAtual tentativasAtual (tentativasRestantes-1) nomeJogador
+    
+    else
+        do
+        --let pontuacaoFinal = pontuacao
+        putStrLn ("\nFim de jogo! Você atingiu o máximo de tentativas possíveis.")
+        putStr ("Jogador ")
+        putStr (nomeJogador)
+        putStr (", sua pontuação foi: ")
+        putStr (show pontuacao)
+        putStrLn "\n"
+        exitSuccess
+        --putStrLn "\n\n"
+        --return ()
 
 
 entraNomeJogador :: IO String
@@ -214,7 +234,7 @@ jogo = do
     imprimeLista listaNavio
     putStrLn "\n"
 
-    rotinaJogo listaBarco listaSub listaNavio [] [] [] 0 []
+    rotinaJogo listaBarco listaSub listaNavio [] [] [] 0 [] 1 nomeJogador
 
 
 ranking = putStrLn "RANKING ..."
