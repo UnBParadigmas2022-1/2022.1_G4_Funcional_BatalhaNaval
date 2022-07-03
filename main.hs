@@ -3,6 +3,20 @@ import Data.Char (ord)
 import Data.List (permutations)
 import System.Random
 
+converter :: String -> [[String]]
+converter = map (map return) . lines
+
+removeUltimoItem :: [[String]] -> [[String]]
+removeUltimoItem = map init
+
+removePrimeiroItem :: [[String]] -> [[String]]
+removePrimeiroItem = map tail
+
+converterListaParaTupla :: [[String]] -> [(Int, Int)]
+converterListaParaTupla = map (\[a,b] -> (read a::Int, read b::Int))
+
+filtrarEmbarcacao lista tipo = 
+    filter (\x -> head x == tipo) lista
 
 verificandoOpcoes opcao = 
     if opcao == "1" then jogo
@@ -82,25 +96,6 @@ entraCoordenadaJogadorY = do
 imprimeLista lista = do
     print lista
 
-
-geraCoordenadaSub pos_y n = do
-    head <- randomRIO (1, (n-1))  :: IO Int
-    let tail = (head + 1)
-    return [(pos_y, head), (pos_y, tail)]
-
-geraCoordenadaBarco pos_y n = do
-    head <- randomRIO (1, (n-2))  :: IO Int
-    let body = (head + 1)
-    let tail = (head + 2)
-    return [(pos_y, head), (pos_y, body), (pos_y, tail)]
-
-geraCoordenadaNavio pos_y n = do
-    head <- randomRIO (1, (n-3))  :: IO Int
-    let body1 = (head + 1)
-    let body2 = (head + 2)
-    let tail = (head + 3)
-    return [(pos_y, head), (pos_y, body1), (pos_y, body2), (pos_y, tail)]
-
 encontraCoordenadaLista coordenadaX coordenadaY lista tipo = do
     if ((any (\(x, y) -> x == coordenadaX && y == coordenadaY) lista) && tipo == 4)
         then putStrLn "\nAcertou um navio! + 4 pontos\n"
@@ -114,15 +109,26 @@ jogo = do
     nomeJogador <- entraNomeJogador
     imprimeTabuleiroBatalhaNaval 9
 
-    -- cria embarcações no mapa
-    sub1 <- geraCoordenadaSub 1 9
-    sub2 <- geraCoordenadaSub 3 9
-    barco1 <- geraCoordenadaBarco 4 9
-    barco2 <- geraCoordenadaBarco 6 9
-    navio1 <- geraCoordenadaNavio 7 9
-    let listaSub = sub1 ++ sub2 
-    let listaBarco = barco1 ++ barco2
-    let listaNavio = navio1
+    -- Ler o arquivo de entrada aleatório
+    arquivo <- randomRIO (0, 99) :: IO Int
+    conteudo <- readFile ("maps/"++show arquivo++".txt")
+
+    -- Converter o arquivo de entrada em uma lista de linhas
+    let mapa = converter conteudo
+    let mapaSemUltimo = removeUltimoItem mapa
+
+    -- Filtrar o mapa para pegar apenas as linhas que contém embarcações
+    let submarinosLista = filtrarEmbarcacao mapaSemUltimo "S"
+    let submarinosSemLetra = removePrimeiroItem submarinosLista
+    let listaSub = converterListaParaTupla submarinosSemLetra    
+
+    let barcosLista = filtrarEmbarcacao mapaSemUltimo "B"
+    let barcosSemLetra = removePrimeiroItem barcosLista
+    let listaBarco = converterListaParaTupla barcosSemLetra
+
+    let naviosLista = filtrarEmbarcacao mapaSemUltimo "N"
+    let naviosSemLetra = removePrimeiroItem naviosLista
+    let listaNavio = converterListaParaTupla naviosSemLetra
 
     -- visualiza a lista gerada
     putStrLn "Lista de embarcações:\n"
