@@ -40,6 +40,7 @@ imprimeTabuleiro n = do
     if n == 0 then do
         return ()
     else do
+
         putStr "~ "
         imprimeTabuleiro (n-1)
 
@@ -62,6 +63,78 @@ imprimeTabuleiroBatalhaNaval n = do
     putStrLn ""
     imprimeCoordenadaY indicesY n
     putStrLn ""
+
+
+filtrarAlvosAtingidos lista xInserido yInserido = 
+    filter (\(x, y) -> x == xInserido && y == yInserido) lista
+
+filtrarAlvosNaoAtingidos lista xInserido yInserido = 
+    filter (\(x, y) -> x /= xInserido || y /= yInserido) lista
+
+rotinaJogo barcos sub navios barcosAtingidos naviosAtingidos subsAtingidos pontuacao tentativas = do
+    
+    -- solicita jogada
+    coordenadaX <- entraCoordenadaJogadorX
+    coordenadaY <- entraCoordenadaJogadorY
+
+
+
+    -- 4 = navio
+    -- 3 = barco
+    -- 2 = sub
+    -- verifica se a jogada acertou o barco
+    let pontuacaoAtual = 0
+
+
+    let encontrou = any (\(x, y) -> x == coordenadaX && y == coordenadaY) tentativas
+    
+    
+    if (encontrou)
+        then do 
+            putStrLn "Esse ponto já foi atacado. Você está perdendo tempo na guerra. Coloque uma nova coordenada."
+            rotinaJogo barcos sub navios barcosAtingidos naviosAtingidos subsAtingidos pontuacao tentativas
+    
+    else do
+        let coordenadas = [(coordenadaX, coordenadaY)]
+        let tentativasAtual = tentativas ++ coordenadas
+        print(coordenadas)
+        print(tentativasAtual)
+
+
+        --if ((achouCoordenada coordenadaX coordenadaY tentativasAtual) == 1)
+            --then let pontuacaoAtual = pontuacao + 3
+            --    in coordenadas:barcosAtingidos
+
+        -- else if (achouCoordenada coordenadaX coordenadaY sub)
+        --     then let pontuacaoAtual = pontuacao + 2
+        --         in coordenadas:subsAtingidos
+
+        -- else if (achouCoordenada coordenadaX coordenadaY navios)
+        --     then let pontuacaoAtual = pontuacao + 4
+        --         in coordenadas:naviosAtingidos
+
+        -- else
+        --     if (pontuacao > 0)
+        --         then putStrLn "Poxa! Você não atingiu nenhuma embarcação ativa e perdeu 1 ponto."
+        --     else
+        --         putStrLn "Poxa! Você não atingiu nenhuma embarcação ativa."
+
+
+        --(coordenadaX, coordenadaY):tentativas
+
+
+        -- verificar onde já existe embarcação e mostrá-las
+
+        -- let barcosAtingidos = filtrarAlvosNaoAtingidos(barcos, coordenadaX, coordenadaY)
+        -- let naviosAtingidos = filtrarAlvosNaoAtingidos(navios, coordenadaX, coordenadaY)
+        -- let subAtingidos = filtrarAlvosNaoAtingidos(sub, coordenadaX, coordenadaY)
+
+
+
+        imprimeTabuleiroBatalhaNaval 9
+
+
+        rotinaJogo barcos sub navios barcosAtingidos naviosAtingidos subsAtingidos pontuacaoAtual tentativasAtual
 
 
 entraNomeJogador :: IO String
@@ -96,14 +169,12 @@ entraCoordenadaJogadorY = do
 imprimeLista lista = do
     print lista
 
-encontraCoordenadaLista coordenadaX coordenadaY lista tipo = do
-    if ((any (\(x, y) -> x == coordenadaX && y == coordenadaY) lista) && tipo == 4)
-        then putStrLn "\nAcertou um navio! + 4 pontos\n"
-    else if ((any (\(x, y) -> x == coordenadaX && y == coordenadaY) lista) && tipo == 3)
-        then putStrLn "\nAcertou um barco! + 3 pontos\n"
-    else if ((any (\(x, y) -> x == coordenadaX && y == coordenadaY) lista) && tipo == 2)
-        then putStrLn "\nAcertou um sub! + 2 pontos\n"
-    else putStrLn "\nErrou!\n"
+achouCoordenada coordenadaX coordenadaY lista 
+    | (any (\(x, y) -> x == coordenadaX && y == coordenadaY) lista) = 1
+    | otherwise = 0
+    -- if ((any (\(x, y) -> x == coordenadaX && y == coordenadaY) lista))
+    --     then 1
+    -- else 0
 
 jogo = do    
     nomeJogador <- entraNomeJogador
@@ -137,19 +208,7 @@ jogo = do
     imprimeLista listaNavio
     putStrLn "\n"
 
-    -- solicita jogada
-    coordenadaX <- entraCoordenadaJogadorX
-    coordenadaY <- entraCoordenadaJogadorY
-
-    -- 4 = navio
-    -- 3 = barco
-    -- 2 = sub
-    -- verifica se a jogada acertou o navio 
-    encontraCoordenadaLista coordenadaX coordenadaY listaBarco 3
-
-    -- verificar onde já existe embarcação e mostrá-las
-    imprimeTabuleiroBatalhaNaval 9
-
+    rotinaJogo listaBarco listaSub listaNavio [] [] [] 0 []
 
 
 ranking = putStrLn "RANKING ..."
