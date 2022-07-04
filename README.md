@@ -72,6 +72,7 @@ Apresente, brevemente, como cada membro do grupo contribuiu para o projeto.
 |Nome do Membro | Contribuição | Significância da Contribuição para o Projeto (Excelente/Boa/Regular/Ruim/Nula) |
 | -- | -- | -- |
 | Álvaro Leles  |  Adição de lógicas iniciais em ambos módulos do projeto e integralização entre esses módulos | Boa |
+| Ian Fillipe  | Adição das lógicas relacionada a criação do mapa inicial e suporte no desenvolvimento | Boa |
 | Ítalo Vinícius  | Adição das lógicas principais, suporte no desenvolvimento, desenvolvimento dos mapas e seu respectivo interpretador e parser | Excelente |
 
 ## Outros 
