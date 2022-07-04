@@ -72,8 +72,14 @@ Apresente, brevemente, como cada membro do grupo contribuiu para o projeto.
 |Nome do Membro | Contribuição | Significância da Contribuição para o Projeto (Excelente/Boa/Regular/Ruim/Nula) |
 | -- | -- | -- |
 | Álvaro Leles  |  Adição de lógicas iniciais em ambos módulos do projeto, integralização entre esses módulos e ajuda no desenvolvimento da finalização do jogo | Boa |
-| Ian Fillipe  | Adição das lógicas relacionada a criação do mapa inicial e suporte no desenvolvimento | Boa |
+| Gabriel Avelino  |  Contribuição na documentação e suporte no desenvolvimento na criação do mapa | Boa |
+| Gabriel Bonifácio  |  Contribuiu no desenvolvimento do mapa e das lógicas principais | Boa |
+| Guilherme de Morais  |  Desenvolvimento da lógica do projeto e verificação das coordenadas atingidas | Boa |
+| Ítalo Alves  |  Desenvolvimento da parte do ranking na questão de arquivos | Boa |
+| Ian Fillipe  | Adição das lógicas relacionada a criação do mapa inicial e suporte no desenvolvimento | Excelente |
 | Ítalo Vinícius  | Adição das lógicas principais, suporte no desenvolvimento, desenvolvimento dos mapas e seu respectivo interpretador e parser | Excelente |
+| Ricardo Castro  | Iniciativa de começar o trabalho | Regular |
+
 
 ## Outros 
 Quaisquer outras informações sobre o projeto podem ser descritas aqui.
