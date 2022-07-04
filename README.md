@@ -23,6 +23,8 @@ O nosso projeto aborda um jogo típico e bastante conhecido, o <a>batalha naval<
 
 ## Screenshots
 Adicione 2 ou mais screenshots do projeto em termos de interface e/ou funcionamento.
+![Screenshot mostrando jogo](img/screenshot_1.png "Jogo")
+![Screenshot mostrando ranking](img/screenshot_2.png "Ranking")
 
 ## Instalação 
 **Linguagens**: Haskell<br>
@@ -53,6 +55,8 @@ Para rodar o programa:
 Explique como usar seu projeto.
 Procure ilustrar em passos, com apoio de telas do software.
 
+Depois de ter rodado a aplicação com os passos descritos acima, o jogo vai dar em tela as instruções que o usuário deve seguir para jogar.
+
 ## Vídeo
 Adicione 1 ou mais vídeos com a execução do projeto.
 Procure: 
@@ -67,7 +71,7 @@ TEMPO: +/- 15min
 Apresente, brevemente, como cada membro do grupo contribuiu para o projeto.
 |Nome do Membro | Contribuição | Significância da Contribuição para o Projeto (Excelente/Boa/Regular/Ruim/Nula) |
 | -- | -- | -- |
-| Fulano  |  Programação dos Fatos da Base de Conhecimento Lógica | Boa |
+| Álvaro Leles  |  Adição de lógicas iniciais em ambos módulos do projeto e integralização entre esses módulos | Boa |
 
 ## Outros 
 Quaisquer outras informações sobre o projeto podem ser descritas aqui.
