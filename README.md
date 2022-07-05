@@ -84,10 +84,33 @@ Apresente, brevemente, como cada membro do grupo contribuiu para o projeto.
 ## Outros 
 Quaisquer outras informações sobre o projeto podem ser descritas aqui.
 (i) Lições Aprendidas;
+
+- Melhoria na lógica recursiva
+- Leitura mais aprofundada de documentações
+
 (ii) Percepções;
-(iii) Contribuições e Fragilidades, e
+
+Percebemos que a linguagem tem uma curva de aprendizagem é alta, pois pensar fora da caixa em relação a não utilizar laços de repetição e ter que driblar o fato de que não podemos modificar o valor de variáveis, isto fez com que o aprender o paradigma fosse ainda mais difícil pois nunca o tínhamos testado antes
+
+(iii) Contribuições e Fragilidades
+
+- Com a falta de algumas funções básicas de outras linguagens como o For foi mais difícil criar algumas
+ideias, mas com o uso da recursividade foi possível sobrepor esse obstáculo.
+
 (iV) Trabalhos Futuros.
+
+- Modularizar o código, pois facilitaríamos desse jeito o entendimento do código
+
+- Melhorar a questão da recursividade do código, acabando que muitas funções ficaram extensas
+
+- Trabalhar em mais detalhes no jogo, como dificuldades, possibilidade de 2 jogadores batalharem, etc.
 
 ## Fontes
 Referencie, adequadamente, as referências utilizadas.
 Indique ainda, fontes de leitura complementares.
+
+Haskell Lists: The Ultimate Guide. Disponível em: <https://www.haskelltutorials.com/guides/haskell-lists-ultimate-guide.html>. Acesso em: 30 jun. 2022. 
+Zvon - Haskell Reference. Disponível em: <http://zvon.org/other/haskell/Outputprelude/index.html>. Acesso em: 30 jul. 2022. 
+Haskell Tutorial. Disponível em: <https://www.tutorialspoint.com/haskell/index.htm>. Acesso em: 1 jul. 2022. 
+How to work on lists - HaskellWiki. Disponível em: <https://wiki.haskell.org/How_to_work_on_lists>. Acesso em: 1 jul. 2022. 
+List comprehension - HaskellWiki. Disponível em: <https://wiki.haskell.org/List_comprehension>. Acesso em: 2 jul. 2022. 
