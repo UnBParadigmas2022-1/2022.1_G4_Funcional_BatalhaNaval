@@ -76,7 +76,7 @@ Apresente, brevemente, como cada membro do grupo contribuiu para o projeto.
 | Gabriel Bonifácio  |  Contribuiu no desenvolvimento do mapa e das lógicas principais | Boa |
 | Guilherme de Morais  |  Desenvolvimento da lógica do projeto e verificação das coordenadas atingidas | Boa |
 | Ítalo Alves  |  Desenvolvimento da parte do ranking na questão de arquivos | Boa |
-| Ian Fillipe  | Adição das lógicas relacionada a criação do mapa inicial e suporte no desenvolvimento | Excelente |
+| Ian Fillipe  | Adição das lógicas relacionada a criação do mapa e coordenadas, e suporte no desenvolvimento | Excelente |
 | Ítalo Vinícius  | Adição das lógicas principais, suporte no desenvolvimento, desenvolvimento dos mapas e seu respectivo interpretador e parser | Excelente |
 | Ricardo Castro  | Iniciativa de começar o trabalho | Regular |
 
@@ -109,8 +109,12 @@ ideias, mas com o uso da recursividade foi possível sobrepor esse obstáculo.
 Referencie, adequadamente, as referências utilizadas.
 Indique ainda, fontes de leitura complementares.
 
-Haskell Lists: The Ultimate Guide. Disponível em: <https://www.haskelltutorials.com/guides/haskell-lists-ultimate-guide.html>. Acesso em: 30 jun. 2022. 
-Zvon - Haskell Reference. Disponível em: <http://zvon.org/other/haskell/Outputprelude/index.html>. Acesso em: 30 jul. 2022. 
-Haskell Tutorial. Disponível em: <https://www.tutorialspoint.com/haskell/index.htm>. Acesso em: 1 jul. 2022. 
-How to work on lists - HaskellWiki. Disponível em: <https://wiki.haskell.org/How_to_work_on_lists>. Acesso em: 1 jul. 2022. 
-List comprehension - HaskellWiki. Disponível em: <https://wiki.haskell.org/List_comprehension>. Acesso em: 2 jul. 2022. 
+> Haskell Lists: The Ultimate Guide. Disponível em: <https://www.haskelltutorials.com/guides/haskell-lists-ultimate-guide.html>. Acesso em: 30 jun. 2022. 
+
+> Zvon - Haskell Reference. Disponível em: <http://zvon.org/other/haskell/Outputprelude/index.html>. Acesso em: 30 jul. 2022. 
+
+>Haskell Tutorial. Disponível em: <https://www.tutorialspoint.com/haskell/index.htm>. Acesso em: 1 jul. 2022. 
+
+>How to work on lists - HaskellWiki. Disponível em: <https://wiki.haskell.org/How_to_work_on_lists>. Acesso em: 1 jul. 2022. 
+
+>List comprehension - HaskellWiki. Disponível em: <https://wiki.haskell.org/List_comprehension>. Acesso em: 2 jul. 2022. 
